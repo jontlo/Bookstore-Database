@@ -1,0 +1,50 @@
+<!-- authors.hbs -->
+<h1>Authors</h1>
+<p>A list of authors whose works we have / have had in stock</p>
+
+{{!-- Create a table --}}
+<table id="authors-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the isbn13, title, price, publisherId, and quantity, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.authorId}}</td>
+            <td>{{this.authorFirstName}}</td>
+            <td>{{this.authorLastName}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the publishers table --}}
+<h2>Add a new Author</h2>
+<p>To add a new author, please enter their information below and click 'Submit'!</p>
+<form id="add-author-form">
+    <label for="input-aFirstName">*First Name: </label>
+    <input type="text" name="input-aFirstName" id="input-aFirstName"/>
+
+    <label for="input-aLastName">*Last Name: </label>
+    <input type="text" name="input-aLastName" id="input-aLastName"/>
+
+    <input type="submit"/>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_author.js"></script>

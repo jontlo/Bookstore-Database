@@ -1,0 +1,276 @@
+<!-- index.hbs -->
+<h1>Books</h1>
+<p>A list of books we carry / have carried</p>
+
+<!-- VIEW SELECT -->
+<!--https://www.w3schools.com/tags/att_input_type_radio.asp -->
+
+<form id="view-select" class="tab-wrapper">
+    <input type="radio" class="tab" id="books-tab" name="view-tab" value="1" checked="checked"/>
+    <label for="books-tab">Books</label>
+    
+    <input type="radio" class="tab" id="booksauthors-tab" name="view-tab" value="2"/>
+    <label for="booksauthors-tab">BooksAuthors</label>
+    
+    <input type="radio" class="tab" id="booksgenres-tab" name="view-tab" value="3"/>
+    <label for="booksgenres-tab">BooksGenres</label>
+    
+    <input type="radio" class="tab" id="combinedtable-tab" name="view-tab" value="4"/>
+    <label for="combinedtable-tab">Combined Information</label>
+</form>
+
+<!--    BOOKS    -->
+<div id="books-section">
+
+    <h2>Books Table</h2>
+    {{!-- Create a Books table --}}
+    <table id="books-table">
+        {{!-- Header section --}}
+        <thead>
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each booksdata.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+            {{!-- For each row, print the isbn13, title, price, publisherId, and quantity, in order --}}
+            {{#each booksdata}}
+            <tr>
+                <td>{{this.ISBN13}}</td>
+                <td>{{this.Title}}</td>
+                <td>{{this.Publisher}}</td>
+                <td class="dollars">{{this.Price}}</td>
+                <td>{{this.Quantity}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- Search bar to search books by title --}}
+    <h2>Search for Books</h2>
+    <p>Search by book title using the field below. Partial titles are okay too.</p>
+    <form id="search-bookTitle" method='GET' action='/books'>
+        <label for="input-bookTitle">Search by Book Title: </label>
+        <input type="text" name="bookTitle" id="input-bookTitle-search">
+
+        <input type="submit">
+        <a href="/books"><button>Reset</button></a>
+    </form>
+
+    {{!-- Form to add a record to the books table --}}
+    <h2>Add a new Book</h2>
+    <p>To add a new book, please enter its information below and click 'Submit'!</p>
+    <form id="add-book-form">
+        <label for="input-bookIsbn">*ISBN 13: </label>
+        <input type="text" name="input-bookIsbn" id="input-bookIsbn">
+
+        <label for="input-bookTitle">*Title: </label>
+        <input type="text" name="input-bookTitle" id="input-bookTitle"/>
+
+        <label for="input-bookPub">Publisher: </label>
+        <select name="input-bookPub" id="input-bookPub">
+            <option value="">-- Select a Publisher --</option>
+            {{#each publishersdata}}
+                <option value="{{this.publisherId}}">{{this.publisherName}}</option>
+            {{/each}}
+        </select>
+        
+        <label for="input-bookPrice">*Price: </label>
+        <input type="number" step="0.01" name="input-bookPrice" id="input-bookPrice"/>
+
+        <label for="input-bookQuantity">*Quantity: </label>
+        <input type="number" name="input-bookQuantity" id="input-bookQuantity"/>
+
+        <input type="submit" form="add-book-form"/>
+    </form>
+</div>
+
+<!--    BOOKSAUTHORS    -->
+<div id="booksauthors-section" style="display:none">
+    <h2>BooksAuthors Table</h2>
+    {{!-- Create a BooksAuthors table --}}
+    <table id="booksauthors-table">
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each booksauthorsdata.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the isbn13, title, price, publisherId, and quantity, in order --}}
+            {{#each booksauthorsdata}}
+            <tr>
+                <td>{{this.ID}}</td>
+                <td>{{this.Author}}</td>
+                <td>{{this.Book}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    {{!-- Form to add a record to the BooksAuthors table --}}
+    <h2>Attribute a Book to an Author</h2>
+    <p>To attribute a book to an author, please enter the author's information and the name of the book below and click 'Submit'!<p>
+    <form id="add-bookauthor-form">
+        <label for="input-authorID">Author: </label>
+        <select name="input-authorID" id="input-authorID">
+            <option value=""> -- Select an Author -- </option>
+            {{#each authorsdata}}
+            <option value="{{this.authorId}}">{{this.authorFirstName}} {{this.authorLastName}}</option>
+            {{/each}}
+        </select>
+
+        <label for="input-bookID">Book: </label>
+        <select name="input-bookID" id="input-bookID"/>
+            <option value=""> -- Select a Book -- </option>
+            {{#each booksdata}}
+            <option value="{{this.ISBN13}}">{{this.Title}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit" form="add-bookauthor-form"/>
+    </form>
+</div>
+
+<!--    BOOKSGENRES    -->
+<div id="booksgenres-section" style="display:none">
+    <h2>BooksGenres Table</h2>
+    {{!-- Create a BooksGenres table --}}
+    <table id="booksgenres-table">
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each booksgenresdata.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the isbn13, title, price, publisherId, and quantity, in order --}}
+            {{#each booksgenresdata}}
+            <tr>
+                <td>{{this.ID}}</td>
+                <td>{{this.Book}}</td>
+                <td>{{this.Genre}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+
+    <h2>Add a Genre to a Book</h2>
+    <p>To add a genre to a book, please enter the name of the book and the genre below and click 'Submit'!<p>
+    <form id="add-bookgenre-form">
+        <label for="input-gBookID">Book: </label>
+        <select name="input-gBookID" id="input-gBookID"/>
+            <option value=""> -- Select a Book -- </option>
+            {{#each booksdata}}
+            <option value="{{this.ISBN13}}">{{this.Title}}</option>
+            {{/each}}
+        </select>
+        
+        <label for="input-genreID">Genre: </label>
+        <select name="input-genreID" id="input-genreID">
+            <option value=""> -- Select a Genre -- </option>
+            {{#each genresdata}}
+            <option value="{{this.genreId}}">{{this.genreName}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit" form="add-bookgenre-form"/>
+    </form>
+
+    <h2>Update a Book's Genre</h2>
+    <p>To update the genre of a book, please select the ID of the Book-Genre Relationship you want to update (see table for reference), and either select the new genre below or leave it blank and click 'Submit'!<p>
+    <form id="update-bookgenre-form">
+        <label for="input-updateBookGenreID">Book-Genre Relationship: </label>
+        <select name="input-updateBookGenreID" id="input-updateBookGenreID"/>
+            <option value=""> -- Select a Relationship -- </option>
+            {{#each booksgenresdata}}
+            <option value="{{this.ID}}">{{this.ID}}</option>
+            {{/each}}
+        </select>
+        
+        <label for="input-updateGenreID">Genre: </label>
+        <select name="input-updateGenreID" id="input-updateGenreID">
+            <option value=""> -- Select a Genre -- </option>
+            {{#each genresdata}}
+            <option value="{{this.genreId}}">{{this.genreName}}</option>
+            {{/each}}
+        </select>
+
+        <input type="submit" form="update-bookgenre-form"/>
+    </form>
+</div>
+
+<div id="combinedtable-section" style="display:none">
+    <h2>All Book Information</h2>
+    <p>The page may need to be refreshed for new information to show up</p>
+    {{!-- Create a Books table --}}
+    <table id="combined-table">
+
+        {{!-- Header section --}}
+        <thead>
+
+            {{!-- For just the first row, we print each key of the row object as a header cell so we
+            know what each column means when the page renders --}}
+            <tr>
+                {{#each combineddata.[0]}}
+                <th>
+                    {{@key}}
+                </th>
+                {{/each}}
+            </tr>
+        </thead>
+
+        {{!-- Body section --}}
+        <tbody>
+
+            {{!-- For each row, print the isbn13, title, price, publisherId, and quantity, in order --}}
+            {{#each combineddata}}
+            <tr>
+                <td>{{this.ISBN13}}</td>
+                <td>{{this.Title}}</td>
+                <td>{{this.Author}}</td>
+                <td>{{this.Genre}}</td>
+                <td class="dollars">{{this.Price}}</td>
+                <td>{{this.Publisher}}</td>
+                <td>{{this.QTY}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX requests --}}
+<script src="./js/add_book.js"></script>
+<script src="./js/add_bookauthor.js"></script>
+<script src="./js/add_bookgenre.js"></script>
+<script src="./js/update_bookgenre.js"></script>
+<script src="./js/books_view_select.js"></script>

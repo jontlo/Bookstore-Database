@@ -1,0 +1,97 @@
+/* Body Styling */
+body {
+    padding-left: 15px;
+    padding-right: 30px;
+}
+
+/* Nav Bar Styling */
+/* https://www.w3schools.com/css/css_padding.asp */
+.navwrapper {
+    display: inline-block;
+    width: 100%;
+    background-color: #aaa;
+    padding: 10px 0 10px 0;
+}
+
+/* https://stackoverflow.com/questions/35880392/remove-line-under-navigation-text */
+.navitem {
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+.navitem:hover {
+    background-color: rgb(143, 142, 142);
+}
+
+/* Table Styling */
+/* https://www.w3schools.com/css/css_table.asp */
+table, th, td {
+    border: 1px solid;
+}
+
+th, td {
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* CSS for tabs on Books page */
+/* https://codepen.io/istavros/pen/JjgbeW */
+.tab-wrapper {
+    clear: both;
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #428bca;
+    padding: 0 10px;
+    position: relative;
+}
+
+input.tab {
+    position: absolute;
+    left: -99999em;
+    top: -99999em;
+}
+
+input.tab + label {
+    cursor: pointer;
+    float: left;
+    border: 1px solid #aaa;
+    border-bottom: 0;
+    background-color: #fff;
+    margin-right: -1px;
+    padding: .5em 1em;
+    position: relative;
+}
+
+input.tab + label:hover {
+    background-color: #eee;
+}
+
+input.tab:checked + label {
+    box-shadow: 0 3px 0 -1px #fff,
+        inset 0 5px 0 -1px #13CD4A;
+    background-color: #fff;
+    border-color: #428bca;
+    z-index: 1;
+}
+
+/* Currency styling */
+.dollars:before{
+    content: "$";
+}
+
+/* Footer Styling */
+/* https://www.geeksforgeeks.org/how-to-create-footer-to-stay-at-the-bottom-of-a-web-page/ */
+/* https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Center_an_element */
+
+footer {
+    position: fixed;
+    padding: 10px 10px 0px 10px;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+}

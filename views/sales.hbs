@@ -1,0 +1,67 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="./js/delete_sale.js"></script>
+
+<!-- sales.hbs -->
+<h1>Sales</h1>
+
+{{!-- Create a table --}}
+<div id="sales-section">
+<table id="sales-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the saleId, saleDay, totalSaleAmount, and employeeName in order --}}
+        {{#each data}}
+        <tr data-value={{this.saleId}}>
+            <td>{{this.saleId}}</td>
+            <td>{{this.[saleDay]}}</td>
+            <td>{{this.totalSaleAmount}}</td>
+            <td>{{this.[employeeName]}}</td>
+            <td><button onclick="deleteSale({{this.saleId}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a record to the sales table --}}
+<h2>Add a new sale</h2>
+<p>To add a new sale, please enter their information below and click 'Submit'!</p>
+<form id="add-sale-form">
+    <label for="input-sale-date">Sale Date: </label>
+    <input type="date" name="input-sale-date" id="input-sale-date">
+
+    {{!-- <label for="input-total-sale-amount">Total Sale Amount: </label>
+    <input type="number" step="0.01" name="input-total-sale-amount" id="input-total-sale-amount"> --}}
+
+    {{!-- Drop down for Employee ID --}}
+    <label for="input-employee-id">Employee's name: </label>
+    <select name="input-employee-id" id="employee-id-select">
+        <option value="test">Select an Employee</option>
+        {{#each employees}}
+        <option value="{{this.employeeId}}">{{this.employeeFirstName}} {{this.employeeLastName}}</option>
+        {{/each}}
+    </select>
+
+    <input type="submit"/>
+</form>
+</div>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_sale.js"></script>

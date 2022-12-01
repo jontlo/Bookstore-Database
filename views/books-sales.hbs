@@ -1,0 +1,70 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="./js/delete_books_sales.js"></script>
+
+<!-- books-sales.hbs -->
+<h1>BooksSales</h1>
+
+{{!-- Create a table --}}
+<div id="books-sales-section">
+<table id="books-sales-table">
+
+    {{!-- Header section --}}
+    <thead>
+        <tr>
+            {{#each bookssales.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the isbn13SaleId, isbn13, saleId, quantity, lineTotal, delete button in order --}}
+        {{#each bookssales}}
+        <tr data-value={{this.isbn13SaleId}}>
+            <td>{{this.isbn13SaleId}}</td>
+            <td>{{this.isbn13}}</td>
+            <td>{{this.saleId}}</td>
+            <td>{{this.quantity}}</td>
+            <td>{{this.lineTotal}}</td>
+            <td><button onclick="deleteBooksSales({{this.isbn13SaleId}}, {{this.isbn13}}, {{this.quantity}}, {{this.lineTotal}}, {{this.saleId}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add a line item to the BooksSales table --}}
+<h2>Add Line Items to Sales</h2>
+<p>To add line items to sales, please enter their information below and click 'Submit'!</p>
+<form id="add-line-item-form">
+    {{!-- Drop down for isbn13 --}}
+    <label for="input-isbn13">ISBN 13: </label>
+    <select name="input-isbn13" id="input-isbn13">
+        <option value="test">Select a Book</option>
+        {{#each books}}
+        <option value="{{this.isbn13}}">{{this.isbn13}} ({{this.title}})</option>
+        {{/each}}
+    </select>
+
+    {{!-- Drop down for Sale ID --}}
+    <label for="input-sale-id">Sale ID: </label>
+    <select name="input-sale-id" id="input-sale-id">
+        <option value="test">Select a Sale</option>
+        {{#each data}}
+        <option value="{{this.saleId}}">[{{this.saleId}}] {{this.[saleDay]}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-line-quantity">Quantity: </label>
+    <input type="number" name="input-line-quantity" id="input-line-quantity">
+
+    <input type="submit"/>
+</form>
+</div>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_books_sales.js"></script>

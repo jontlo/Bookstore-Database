@@ -1,0 +1,62 @@
+<!-- index.hbs -->
+<h1>Home Page</h1>
+<section>
+    <p>
+        Rage Against the Page is a locally owned and operated, independent bookstore with a single 
+        location in Boston. They sell their products in person only, and over the last few months, 
+        their business has been growing rapidly due to community engagement and quality of 
+        face-to-face customer service. Rage Against the Page brings in roughly $1 million in annual 
+        sales, keeping an average of 10,000 - 12,000 books in stock at all times, with 
+        16,000 - 19,000 units present on shelves and in backstock. Due to their rapid growth, their 
+        impressively complicated excel spreadsheet is no longer sufficient to manage their business. 
+        They are in need of a database driven back-end to track their inventory of Books, keep 
+        records of Employee information, and be capable of recording 60,000 Sales of individual books 
+        annually. In addition to this, they would like to be able to search their inventory based on 
+        Authors, Publishers, and Genres, as well as receive sales reports. They are not concerned 
+        with tracking customers themselves, but rather just the books sold. Sales will be attributed 
+        to specific employees.
+    </p>
+    <p>
+        <b>Books:</b>
+        an object table that keeps a running inventory of books the bookstore has in stock, as well as 
+        their quantities.
+    </p>
+    <p>
+        <b>BooksAuthors:</b>
+        an intersection table to relate books to authors. Some books have many authors and some authors 
+        have many books.
+    </p>
+    <p>
+        <b>Authors:</b>
+        an object table that records the details of authors whose books the bookstore has had in stock, 
+        including authors whose books are no longer in stock.
+    </p>
+    <p>
+        <b>Publishers:</b>
+        an object table that records the details of publishers whose books the bookstore has had in 
+        stock, including publishers whose books are no longer in stock.
+    </p>
+    <p>
+        <b>Genres:</b>
+        a category table that lists all of the available genres.
+    </p>
+    <p>
+        <b>BooksGenres:</b>
+        an intersection table to relate Books and Genres, tracking one or more genres for each book.
+    </p>
+    <p>
+        <b>Sales:</b>
+        a transaction table that tracks sales the bookstore has made, including the sale date, amount, 
+        and employee that made the sale.
+    </p>
+    <p>
+        <b>BooksSales:</b>
+        an intersection table to relate Books and Sales, tracking information about line items of sales 
+        as they relate to specific books.
+    </p>
+    <p>
+        <b>Employees:</b>
+        an object table that keeps track of current and past employees of the bookstore, along with 
+        relevant data
+    </p>
+</section>

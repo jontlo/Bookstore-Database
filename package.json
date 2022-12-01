@@ -1,0 +1,26 @@
+{
+  "name": "rage-against-the-page",
+  "version": "1.0.0",
+  "description": "MySQL db-driven backend web application project for CS340 at Oregon State University",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kanisxlupus/rage-against-the-page.git"
+  },
+  "author": "Samantha Jones & Jonathan Louangrath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kanisxlupus/rage-against-the-page/issues"
+  },
+  "homepage": "https://github.com/kanisxlupus/rage-against-the-page#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1",
+    "use": "^3.1.1"
+  }
+}

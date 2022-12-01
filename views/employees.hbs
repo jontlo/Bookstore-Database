@@ -1,0 +1,97 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="./js/delete_employee.js"></script>
+
+<!-- employees.hbs -->
+<h1>Employees</h1>
+<p>View employees, search for employees by name, and add an employee to the database</p>
+
+{{!-- Create a table --}}
+<table id="employees-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+           
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the EmployeeId, FirstName, LastName, Phone, hireDate, isActive, Delete, in order --}}
+        {{#each data}}
+        <tr data-value={{this.employeeId}}>
+            <td>{{this.employeeId}}</td>
+            <td>{{this.employeeFirstName}}</td>
+            <td>{{this.employeeLastName}}</td>
+            <td>{{this.employeePhone}}</td>
+            <td>{{{this.[hireDay]}}}</td>
+            <td>{{this.isActive}}</td>
+            <td><button onclick="deleteEmployee({{this.employeeId}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{!-- Form to add an employee to the table  --}}
+<h2>Adding Data with AJAX</h2>
+<p>To add a new employee, please enter their information below and click 'Submit'!</p>
+
+<form id="add-employee-form">
+    <label for="input-fname">First Name: </label>
+    <input type="text" name="input-fname" id="input-fname">
+    
+    <label for="input-lname">Last Name: </label>
+    <input type="text" name="input-lname" id="input-lname">
+
+    <label for="input-phonenumber">Phone Number: </label>
+    <input type="number" name="input-phonenumber" id="input-phonenumber">
+
+    <label for="input-hiredate">Hire Date: </label>
+    <input type="date" name="input-hiredate" id="input-hiredate">
+
+    <label for="input-isactive">Is this employee currently active? </label>
+    <select name="input-isactive" id="input-isactive">
+        <option value="test">Select yes or no</option>
+        <option value="1">Yes</option>
+        <option value="0">No</option>
+    </select>
+
+    <input type="submit">
+</form>
+
+{{!-- Form to update employee's phone number  --}}
+<h2>Updating Employee Data Form</h2>
+<p>To update a specific employee's data select their name from the drop-down menu on the left and their information</p>
+
+<form id="update-employee">
+
+    {{!-- Drop down for Employee ID --}}
+    <label for="input-employee-id">Employee's name: </label>
+    <select name="input-employee-id" id="employee-id-select">
+        <option value="test">Select an Employee</option>
+        {{#each data}}
+        <option value="{{this.employeeId}}">{{this.employeeFirstName}} {{this.employeeLastName}}</option>
+        {{/each}}
+    </select>
+
+    {{!-- Field to enter phone number --}}
+    <label for="input-phoneNumber">Phone Number: </label>
+    <input type="number" name="input-phoneNumber" id="input-phoneNumber">
+
+    <input type="submit">
+
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/update_employee.js"></script>
+<script src="./js/add_employee.js"></script>
